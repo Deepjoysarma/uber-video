@@ -26,4 +26,25 @@ Example:
   "email": "john.doe@example.com",
   "password": "password123"
 }
+
 ```
+
+## Endpoint: `/users/login`
+
+### HTTP Method: POST
+
+### Description:
+Authenticate a user with the provided email and password.
+
+### Request Body:
+The request body should be a JSON object with the following fields:
+
+- `email`: A string representing a valid email address (required).
+- `password`: A string with a minimum length of 6 characters (required).
+
+Example:
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
