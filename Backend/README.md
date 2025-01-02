@@ -26,7 +26,6 @@ Example:
   "email": "john.doe@example.com",
   "password": "password123"
 }
-
 ```
 
 ## Endpoint: `/users/login`
@@ -48,3 +47,24 @@ Example:
   "email": "john.doe@example.com",
   "password": "password123"
 }
+```
+
+## Endpoint: `/users/profile`
+
+### HTTP Method: GET
+
+### Description:
+Retrieve the profile of the authenticated user.
+
+### Headers:
+- `Authorization`: Bearer token (required).
+
+## Endpoint: `/users/logout`
+
+### HTTP Method: GET
+
+### Description:
+Logout the authenticated user by clearing the authentication token.
+
+### Headers:
+- `Authorization`: Bearer token (required).
