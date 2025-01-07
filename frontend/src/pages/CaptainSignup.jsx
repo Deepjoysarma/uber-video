@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CaptainDataContext } from '../context/CaptainContext'
 
 const CaptainSignup = () => {
   const [ email, setEmail ] = useState('')
@@ -7,6 +8,10 @@ const CaptainSignup = () => {
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
     const [ userData, setUserData ] = useState({})
+
+
+    const { captain, setCaptain } = React.useContext(CaptainDataContext)
+
   
     const submitHandler = (e) => {
       e.preventDefault();
