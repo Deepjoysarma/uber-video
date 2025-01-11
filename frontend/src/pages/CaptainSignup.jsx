@@ -60,7 +60,7 @@ const CaptainSignup = () => {
     }
 
   return (
-    <div className='px-5 py-5 h-screen flex flex-col justify-between items-center'>
+    <div className='px-5 py-0 h-screen flex flex-col justify-between items-center'>
         <div>
             <img className='w-20 mb-1' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" srcset="" />
             <form onSubmit={(e) => {
@@ -71,7 +71,7 @@ const CaptainSignup = () => {
                 <div className='flex gap-4'>
                 <input 
                 required
-                className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                 type="text" 
                 placeholder='First Name' 
                 value={firstName}
@@ -79,7 +79,7 @@ const CaptainSignup = () => {
                 />
                 <input 
                 required
-                className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                 type="text" 
                 placeholder='Last Name' 
                 value={lastName}
@@ -90,7 +90,7 @@ const CaptainSignup = () => {
                 <h3 className='text-lg mb-1 font-medium'>What's our Captain's email</h3>
                 <input 
                 required
-                className='bg-[#eeeeee] mb-6 px-4 py-2 border w-full text-base placeholder:text-base'
+                className='bg-[#eeeeee] mb-5 px-4 py-2 border w-full text-base placeholder:text-base'
                 type="email" 
                 placeholder='example@gmail.com' 
                 value={email}
@@ -99,7 +99,7 @@ const CaptainSignup = () => {
                 <h3 className='text-lg mb-1 font-medium'>Enter Password</h3>
                 <input 
                 required               
-                className='bg-[#eeeeee] mb-6 px-4 py-2 border w-full text-lg placeholder:text-base'
+                className='bg-[#eeeeee] mb-5 px-4 py-2 border w-full text-lg placeholder:text-base'
                 type="password" 
                 placeholder='password' 
                 value={password}
@@ -109,7 +109,7 @@ const CaptainSignup = () => {
                 <div className='flex gap-4'>
                   <input 
                     required
-                    className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                    className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                     type="text" 
                     placeholder='Vehicle Color' 
                     value={vehicleColor}
@@ -117,7 +117,7 @@ const CaptainSignup = () => {
                   />
                   <input 
                     required
-                    className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                    className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                     type="text" 
                     placeholder='Vehicle Plate' 
                     value={vehiclePlate}
@@ -127,7 +127,7 @@ const CaptainSignup = () => {
                 <div className='flex gap-4'>
                   <input 
                     required
-                    className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                    className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                     type="number" 
                     placeholder='Vehicle Capacity' 
                     value={vehicleCapacity}
@@ -135,7 +135,7 @@ const CaptainSignup = () => {
                   />
                   <select 
                     required
-                    className='bg-[#eeeeee] mb-6 px-4 py-2 border w-1/2 text-base placeholder:text-base'
+                    className='bg-[#eeeeee] mb-5 px-4 py-2 border w-1/2 text-base placeholder:text-base'
                     value={vehicleType}
                     onChange={(e) => setVehicleType(e.target.value)}
                   >
@@ -151,7 +151,7 @@ const CaptainSignup = () => {
         </div>
         
         <div>
-          <p className='text-[10px] leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
+          <p className='text-[10px] mb-2 leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
             Policy</span> and <span className='underline'>Terms of Service apply</span>.</p>
         </div>
         
