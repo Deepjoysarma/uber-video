@@ -1,18 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const RidePopUp = (props) => {
+const FinishRide = (props) => {
   return (
-    <div>
+    <div >
       <h5 
       className='p-1 text-center w-[93%] absolute top-0' 
       onClick={() => {
-        props.setRidePopupPanel(false)
+        props.setFinishRidePanel(false)
       }}
       ><i className='text-3xl text-gray-700 ri-arrow-down-wide-line'></i>
       </h5>
     
-        <h3 className='text-2xl font-semibold mb-5'>New Ride Available!</h3>
-        <div className='flex items-center justify-between p-3 bg-yellow-500 rounded-lg mt-4'>
+        <h3 className='text-2xl font-semibold mb-5'>Finish this Ride</h3>
+        <div className='flex items-center justify-between p-4 border-2 border-yellow-500 rounded-lg mt-4'>
             <div className='flex items-center gap-3'>
                 <img className='h-12 w-12 rounded-full object-cover' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9us0MxB35Wv3z03TJFrxhub-WyxqpBKAsjQ&s" alt="" />
                 <h2 className='text-lg font-medium'>Tarun Roy</h2>
@@ -45,21 +46,14 @@ const RidePopUp = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='flex mt-5 w-full items-center justify-between'>
-                
-                <button onClick={() => {
-                    props.setRidePopupPanel(false)
-                }} 
-                className=' mt-1 bg-gray-300 text-gray-700 font-semibold p-3 px-8 rounded-lg'>Ignore</button>
 
-                <button onClick={() => {
-                    props.setConfirmRidePopupPanel(true)
-                }} 
-                className=' bg-green-600 text-white font-semibold p-3 px-8 rounded-lg'>Accept</button>
+            <div className='mt-6 w-full'>
+              <Link to='/captain-riding' className='w-full mt-5 flex text-lg justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Finish Ride</Link>
+              <p className='text-red-500 mt-10 text-xs'>Click on finish ride button if u have completed with the payment.</p>
             </div>
         </div>
     </div>
   )
 }
 
-export default RidePopUp
+export default FinishRide
