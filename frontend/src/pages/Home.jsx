@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import axios from 'axios'
 import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from '../components/LocationSearchPanel'
 import VehiclePanel from '../components/VehiclePanel'
@@ -26,9 +27,52 @@ const Home = () => {
   const [vehicleFound, setVehicleFound] = useState(false)
   const [waitingForDriver, setWaitingForDriver] = useState(false)
 
+
+  const [ pickupSuggestions, setPickupSuggestions ] = useState([])
+  const [ destinationSuggestions, setDestinationSuggestions ] = useState([])
+  const [ activeField, setActiveField ] = useState(null)
+  const [ fare, setFare ] = useState({})
+  const [ vehicleType, setVehicleType ] = useState(null)
+  const [ ride, setRide ] = useState(null)
+
+
+
+
+  const handlePickupChange = async (e) => {
+    setPickup(e.target.value)
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+            params: { address: e.target.value },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+
+        })
+        setPickupSuggestions(response.data)
+    } catch {
+        // handle error
+    }
+  }
+
+  const handleDestinationChange = async (e) => {
+    setDestination(e.target.value)
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+            params: { address: e.target.value },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        setDestinationSuggestions(response.data)
+    } catch {
+        // handle error
+    }
+  }
+
   const submitHandler = (e) => {
     e.preventDefault()
   }
+
 
   useGSAP(function(){
     if(panelOpen){
@@ -106,6 +150,24 @@ const Home = () => {
   },[waitingForDriver])
 
 
+  async function findTrip() {
+    setVehiclePanel(true)
+    setPanelOpen(false)
+
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare`, {
+        params: { pickup, destination },
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+
+
+    console.log(response.data)
+
+
+  }
+
+
   return (
     <div className='h-screen relative overflow-hidden'>
       
@@ -136,28 +198,44 @@ const Home = () => {
             <div className='line absolute h-16 w-1 top-[45%] left-10 rounded-full bg-gray-900'></div>
             
             <input 
-            onClick={() => setPanelOpen(true)}
-            value={pickup} 
-            onChange={(e) => setPickup(e.target.value)}
-            className='bg-[#eee] mt-5 w-full px-12 py-2 text-lg rounded-lg' 
-            type="text" 
-            placeholder='Add a pick-up location' 
+             onClick={() => {
+              setPanelOpen(true)
+              setActiveField('pickup')
+              }}
+              value={pickup}
+              onChange={handlePickupChange}
+              className='bg-[#eee] mt-5 w-full px-12 py-2 text-lg rounded-lg' 
+              type="text" 
+              placeholder='Add a pick-up location' 
             />
             
             <input 
-            onClick={() => setPanelOpen(true)}
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            className='bg-[#eee] mt-3 w-full px-12 py-2 text-lg rounded-lg' 
-            type="text" 
-            placeholder='Enter your destination' 
+              onClick={() => {
+                setPanelOpen(true)
+                setActiveField('destination')
+              }}
+              value={destination}
+              onChange={handleDestinationChange}
+              className='bg-[#eee] mt-3 w-full px-12 py-2 text-lg rounded-lg' 
+              type="text" 
+              placeholder='Enter your destination' 
             />
 
           </form>
+          <button onClick={findTrip} className='bg-black text-white px-4 py-2 rounded-lg mt-3 w-full'>
+              Find Trip
+          </button>
         </div>
         
         <div ref={panelRef} className=' bg-white h-0'>
-          <LocationSearchPanel vehiclePanel={vehiclePanel} setVehiclePanel={setVehiclePanel} panelOpen={panelOpen} setPanelOpen={setPanelOpen}/>
+          <LocationSearchPanel 
+            suggestions={activeField === 'pickup' ? pickupSuggestions : destinationSuggestions}
+            setPanelOpen={setPanelOpen}
+            setVehiclePanel={setVehiclePanel}
+            setPickup={setPickup}
+            setDestination={setDestination}
+            activeField={activeField}
+          />
         </div>
       </div>
 

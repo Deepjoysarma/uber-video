@@ -72,16 +72,11 @@ module.exports.getAddressSuggestions = async (address) => {
     try {
         const response = await axios.get(url);
 
-        if (true) {
+        if (response.data) {
+            // Return as an array of strings (only names)
             return response.data
                 .filter(item => item.display_name)
-                .map(item => ({
-                    name: item.display_name,
-                    lat: item.lat,
-                    lon: item.lon,
-                    type: item.type,
-                    importance: item.importance,
-                }));
+                .map(item => item.display_name);
         } else {
             throw new Error('Unable to fetch coordinates');
         }
