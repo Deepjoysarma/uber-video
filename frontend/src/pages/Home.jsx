@@ -162,7 +162,8 @@ const Home = () => {
     })
 
 
-    console.log(response.data)
+    // console.log(response.data)
+    setFare(response.data)
 
 
   }
@@ -240,7 +241,7 @@ const Home = () => {
       </div>
 
       <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>
-        <VehiclePanel setVehiclePanel={setVehiclePanel} setConfirmRidePanel={setConfirmRidePanel}/>
+        <VehiclePanel fare={fare} setVehiclePanel={setVehiclePanel} setConfirmRidePanel={setConfirmRidePanel}/>
       </div>
 
       <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
