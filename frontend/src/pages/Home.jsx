@@ -169,6 +169,21 @@ const Home = () => {
   }
 
 
+  async function createRide() {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+      pickup,
+      destination,
+      vehicleType
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+
+    console.log(response.data);
+  }
+
+
   return (
     <div className='h-screen relative overflow-hidden'>
       
@@ -241,15 +256,30 @@ const Home = () => {
       </div>
 
       <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>
-        <VehiclePanel fare={fare} setVehiclePanel={setVehiclePanel} setConfirmRidePanel={setConfirmRidePanel}/>
+        <VehiclePanel selectVehicle={setVehicleType} fare={fare} setVehiclePanel={setVehiclePanel} setConfirmRidePanel={setConfirmRidePanel}/>
       </div>
 
       <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
-        <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} setVehicleFound={setVehicleFound} />
+        <ConfirmRide 
+        fare={fare} 
+        vehicleType={vehicleType} 
+        pickup={pickup} 
+        destination={destination} 
+        createRide={createRide} 
+        setConfirmRidePanel={setConfirmRidePanel} 
+        setVehicleFound={setVehicleFound} 
+        />
       </div>
 
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
-        <LookingForDriver setVehicleFound={setVehicleFound}  />
+        <LookingForDriver 
+          fare={fare} 
+          vehicleType={vehicleType} 
+          pickup={pickup} 
+          destination={destination} 
+          createRide={createRide}
+          setVehicleFound={setVehicleFound}
+        />
       </div>
 
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white px-3 py-6 pt-12'>
