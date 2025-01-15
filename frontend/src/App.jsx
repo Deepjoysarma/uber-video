@@ -36,9 +36,7 @@ const App = () => {
           </UserProtectedWrapper>
         } />
         <Route path='/captain-home' element={
-          <CaptainProtectedWrapper>
-            <CaptainHome />
-          </CaptainProtectedWrapper>
+          <CaptainHome />
         } />
         <Route path='/captain/logout' element={
           <CaptainProtectedWrapper>
