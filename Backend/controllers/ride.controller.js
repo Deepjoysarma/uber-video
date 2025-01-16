@@ -21,12 +21,11 @@ module.exports.createRide = async (req, res) => {
         const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
         console.log(pickupCoordinates);
 
-        const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.lng, pickupCoordinates.ltd, 2);
-        console.log("Haraye Paramatmane")
+        const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 3);
+
         
         console.log(captainsInRadius)
 
-        console.log("Pranata Kleshanashaya");
 
     } catch (err) {
 
