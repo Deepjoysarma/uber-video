@@ -1,4 +1,5 @@
 const axios = require('axios')
+const captainModel = require('../models/captain.model');
 // const url = `http://maps.gomaps.pro/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&key=${apiKey}`;
 
 
@@ -85,3 +86,24 @@ module.exports.getAddressSuggestions = async (address) => {
         throw error;
     }
 }
+
+
+
+
+module.exports.getCaptainsInTheRadius = async (lng, ltd, radius) => {
+    try {
+        // Perform the geospatial query
+        const captains = await captainModel.find({
+            location: {
+                $geoWithin: {
+                    $centerSphere: [[lng, ltd], radius / 6371], // Corrected order: [longitude, latitude]
+                },
+            },
+        });
+
+        return captains;
+    } catch (error) {
+        console.error("Error in getCaptainsInTheRadius:", error.message);
+        throw error; // Handle this error in the calling function
+    }
+};

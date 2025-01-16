@@ -19,7 +19,7 @@ function initializeSocket(server) {
 
             const { userId, userType } = data;
 
-            console.log(`User ${userId} joined as ${userType}`);
+            // console.log(`User ${userId} joined as ${userType}`);
 
             if(userType === 'user') {
                 await userModel.findByIdAndUpdate(userId, {
@@ -27,6 +27,21 @@ function initializeSocket(server) {
             }else if(userType === 'captain') {
                 await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
             }
+        });
+
+        socket.on('update-location-captain', async (data) => {
+            const { userId, location } = data;
+
+            if (!location || !location.ltd || !location.lng) {
+                return socket.emit('error', { message: 'Invalid location data' });
+            }
+
+            await captainModel.findByIdAndUpdate(userId, {
+                location: {
+                    ltd: location.ltd,
+                    lng: location.lng
+                }
+            });
         });
 
         socket.on('disconnect', () => {

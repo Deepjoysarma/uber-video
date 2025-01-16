@@ -1,6 +1,7 @@
 const rideService = require('../services/ride.service');
 const { validationResult } = require('express-validator');
 const rideModel = require('../models/ride.model');
+const mapService = require('../services/maps.service');
 
 
 module.exports.createRide = async (req, res) => {
@@ -17,12 +18,21 @@ module.exports.createRide = async (req, res) => {
         const ride = await rideService.createRide({ user: req.user._id, pickup, destination, vehicleType });
         res.status(201).json(ride);
 
+        const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
+        console.log(pickupCoordinates);
+
+        const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.lng, pickupCoordinates.ltd, 2);
+        console.log("Haraye Paramatmane")
         
+        console.log(captainsInRadius)
+
+        console.log("Pranata Kleshanashaya");
 
     } catch (err) {
 
         // console.log(err);
-        return res.status(500).json({ message: err.message });
+        // return res.status(500).json({ message: err.message });
+        return "Govindaya Namo Nama";
     }
 
 };
