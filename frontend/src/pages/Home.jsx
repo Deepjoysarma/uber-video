@@ -49,6 +49,11 @@ const Home = () => {
   }, [ user ])
 
 
+  socket.on('ride-confirmed', ride => {
+    setWaitingForDriver(true)
+  })
+
+
   const handlePickupChange = async (e) => {
     setPickup(e.target.value)
     try {
@@ -179,7 +184,7 @@ const Home = () => {
       }
     })
 
-    console.log(response.data)
+    // console.log(response.data)
   }
 
   return (

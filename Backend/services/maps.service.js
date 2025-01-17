@@ -25,7 +25,7 @@ module.exports.getAddressCoordinate = async (address) => {
             throw new Error('Unable to fetch coordinates');
         }
     } catch (error) {
-        console.error(error);
+        console.error('Get Address coordinate error', error);
         throw error;
     }
 }
@@ -82,7 +82,7 @@ module.exports.getAddressSuggestions = async (address) => {
             throw new Error('Unable to fetch coordinates');
         }
     } catch (error) {
-        console.error(error);
+        console.error('Get address suggetions error', error);
         throw error;
     }
 }
@@ -106,15 +106,16 @@ module.exports.getCaptainsInTheRadius = async (lng, ltd, radius) => {
     try {
         const captains = await captainModel.find(); // Fetch all captains
 
-        // Filter captains based on the distance
-        const captainsInRadius = captains.filter(captain => {
-            const distance = getDistance(ltd, lng, captain.location.lng, captain.location.ltd); // Assuming captain.location is [lng, ltd]
+        // // Filter captains based on the distance
+        // const captainsInRadius = captains.filter(captain => {
+        //     const distance = getDistance(ltd, lng, captain.location.lng, captain.location.ltd); // Assuming captain.location is [lng, ltd]
             
-            // console.log(distance);
-            return distance <= radius;
-        });
+        //     // console.log(distance);
+        //     return distance <= radius;
+        // });
+        console.log(captains, "ddddddddd")
 
-        return captainsInRadius;
+        return captains;
     } catch (error) {
         console.error('Error finding captains within radius:', error);
         throw error;
