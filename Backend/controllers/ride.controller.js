@@ -18,6 +18,7 @@ module.exports.createRide = async (req, res) => {
     try {
         const ride = await rideService.createRide({ user: req.user._id, pickup, destination, vehicleType });
         res.status(201).json(ride);
+        
 
         const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
         console.log(pickupCoordinates);
@@ -27,10 +28,13 @@ module.exports.createRide = async (req, res) => {
         ride.otp = ""
 
         const rideWithUser = await rideModel.findOne({ _id: ride._id }).populate('user');
+
+        console.log(ride, "Krishnaya");
+
+        console.log(rideWithUser);
         
         captainsInRadius.map(captain => {
 
-            // console.log(captain, ride);
 
             sendMessageToSocketId(captain.socketId, {
                 event: 'new-ride',
@@ -78,7 +82,7 @@ module.exports.confirmRide = async (req, res) => {
     const { rideId } = req.body;
 
     try {
-        const ride = await rideService.confirmRide({ rideId });
+        const ride = await rideService.confirmRide({ rideId, captain: req.captain });
 
         sendMessageToSocketId(ride.user.socketId, {
             event: 'ride-confirmed',

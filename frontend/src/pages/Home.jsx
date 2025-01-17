@@ -50,6 +50,7 @@ const Home = () => {
 
 
   socket.on('ride-confirmed', ride => {
+    setVehicleFound(false)
     setWaitingForDriver(true)
   })
 
@@ -169,7 +170,7 @@ const Home = () => {
       }
     })
 
-    // console.log(response.data)
+    console.log(response.data, "amiii")
     setFare(response.data)
   }
 

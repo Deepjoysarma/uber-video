@@ -7,7 +7,7 @@ const CaptainDetails = () => {
 
   // console.log(captain.fullname.firstname);
 
-  const Fullname = captain.fullname.firstname + " " + captain.fullname.lastname;
+  const Fullname = captain?.fullname.firstname + " " + captain?.fullname.lastname;
 
   // console.log(Fullname)
 
