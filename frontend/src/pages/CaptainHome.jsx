@@ -10,8 +10,9 @@ import { CaptainDataContext } from '../context/CaptainContext'
 
 const CaptainHome = () => {
 
-  const [ ridePopupPanel, setRidePopupPanel ] = useState(true)
+  const [ ridePopupPanel, setRidePopupPanel ] = useState(false)
   const [ confirmRidePopupPanel, setConfirmRidePopupPanel ] = useState(false)
+  const [ ride, setRide ] = useState(null)
 
 
   const ridePopupPanelRef = useRef(null)
@@ -49,6 +50,12 @@ const CaptainHome = () => {
   // return () => clearInterval(locationInterval);
 
 
+  }, [])
+
+  console.log("Deep");
+  socket.on('new-ride', (data) => {
+    setRide(data)
+    setRidePopupPanel(true)
   })
 
 
@@ -93,7 +100,11 @@ const CaptainHome = () => {
           <CaptainDetails />
         </div>
         <div ref={ridePopupPanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
-          <RidePopUp setRidePopupPanel={setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel} />
+          <RidePopUp
+          ride={ride}
+          setRidePopupPanel={setRidePopupPanel} 
+          setConfirmRidePopupPanel={setConfirmRidePopupPanel} 
+          />
         </div>
         <div ref={confirmRidePopupPanelRef} className='fixed w-full h-screen z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
           <ConfirmRidePopUp setConfirmRidePopupPanel={setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel} />
