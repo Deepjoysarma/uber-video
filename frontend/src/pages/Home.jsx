@@ -52,6 +52,7 @@ const Home = () => {
   socket.on('ride-confirmed', ride => {
     setVehicleFound(false)
     setWaitingForDriver(true)
+    console.log("ride-confirmed Home is running");
   })
 
 

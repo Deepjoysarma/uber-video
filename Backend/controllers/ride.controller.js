@@ -80,6 +80,9 @@ module.exports.confirmRide = async (req, res) => {
     }
 
     const { rideId } = req.body;
+    
+
+    console.log(rideId);
 
     try {
         const ride = await rideService.confirmRide({ rideId, captain: req.captain });
@@ -92,7 +95,7 @@ module.exports.confirmRide = async (req, res) => {
         return res.status(200).json(ride);
     } catch (err) {
 
-        console.log(err);
+        console.log("ConfirmRide Error" ,err);
         return res.status(500).json({ message: err.message });
     }
 }
