@@ -51,7 +51,9 @@ const Home = () => {
 
   socket.on('ride-confirmed', ride => {
     setVehicleFound(false)
+    setVehiclePanel(false)
     setWaitingForDriver(true)
+    setRide(ride)
     console.log("ride-confirmed Home is running");
   })
 
@@ -307,7 +309,12 @@ const Home = () => {
       )}
 
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white px-3 py-6 pt-12'>
-        <WaitingForDriver waitingForDriver={waitingForDriver} />
+        <WaitingForDriver
+        ride={ride}
+        setVehicleFound={setVehicleFound}
+        setWaitingForDriver={setWaitingForDriver}
+        waitingForDriver={waitingForDriver}
+        />
       </div>
     </div>
   )
