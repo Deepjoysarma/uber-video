@@ -79,13 +79,14 @@ module.exports.confirmRide = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { rideId } = req.body;
+    const { rideId, captain } = req.body;
     
 
     console.log(rideId);
+    console.log(captain);
 
     try {
-        const ride = await rideService.confirmRide({ rideId, captain: req.captain });
+        const ride = await rideService.confirmRide({ rideId, captain });
 
         sendMessageToSocketId(ride.user.socketId, {
             event: 'ride-confirmed',
