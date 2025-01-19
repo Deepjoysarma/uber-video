@@ -22,7 +22,7 @@ const FinishRide = (props) => {
         })
 
         if (response.status === 200) {
-            navigate('/captain-home')
+            navigate('/captain-login') //captain-home gives error that's why redirected to this route after complete the ride captain must login for next ride
         }
 
     }
