@@ -1,12 +1,24 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useContext } from 'react'
+import { SocketContext } from '../context/SocketContext'
+import { useNavigate } from 'react-router-dom'
 
 const Riding = () => {
 
   const location = useLocation()
   const { ride } = location.state || {} // Retrieve ride data
+  const { socket } = useContext(SocketContext)
+  const navigate = useNavigate()
+
 
   console.log(ride, "tarara");
+
+
+  socket.on("ride-ended", () => {
+    navigate('/home')
+  })
+
 
   return (
     <div className='h-screen'>

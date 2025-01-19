@@ -184,7 +184,7 @@ const Home = () => {
       }
     })
 
-    console.log(response.data, "amiii")
+    // console.log(response.data, "amiii")
     setFare(response.data)
   }
 

@@ -13,8 +13,10 @@ const CaptainRiding = () => {
 
   const location = useLocation()
   const rideData = location.state?.ride
+  const captain = location.state?.captain
 
   console.log(rideData, "tututu")
+  console.log(captain, "tutu tutu tara")
 
   useGSAP(function () {
     if (finishRidePanel) {
@@ -58,7 +60,7 @@ const CaptainRiding = () => {
             <button className='bg-green-600 text-white font-semibold p-3 -mr-3 px-8 rounded-lg'>Complete Ride</button>
         </div>
         <div ref={finishRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>
-          <FinishRide ride={rideData} setFinishRidePanel={setFinishRidePanel} />
+          <FinishRide captain={captain} ride={rideData} setFinishRidePanel={setFinishRidePanel} />
         </div>
       </div>
   )
